@@ -12,4 +12,16 @@ public class Lagerposten {
 		this.lagerbestand = lagerbestand;
 		this.preis = preis;
 	}
+
+	public Artikel getArtikel() {
+		return artikel;
+	}
+
+	public int getLagerbestand() {
+		return lagerbestand;
+	}
+
+	public double getPreis() {
+		return preis;
+	}
 }

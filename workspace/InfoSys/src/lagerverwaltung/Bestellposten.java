@@ -10,5 +10,15 @@ public class Bestellposten {
 		this.artikelID = artikelID;
 		this.anzahl = anzahl;
 	}
+
+	public String getArtikelID() {
+		return artikelID;
+	}
+
+	public int getAnzahl() {
+		return anzahl;
+	}
+	
+	
 	
 }
