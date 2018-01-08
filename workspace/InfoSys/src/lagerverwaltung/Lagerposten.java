@@ -29,4 +29,13 @@ public class Lagerposten {
 	public double getPreis() {
 		return preis;
 	}
+	
+	public void addiereMenge(int anzahl)
+	{
+		lagerbestand += anzahl;
+	}
+	public void setPreis(double preis)
+	{
+		this.preis = preis;
+	}
 }
