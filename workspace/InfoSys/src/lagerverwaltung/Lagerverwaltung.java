@@ -8,12 +8,12 @@ import java.util.Set;
 public class Lagerverwaltung {
 	
 	private Set<String> berechtigteMitarbeiter;
-	private List<Lagerposten> lagerbestand;
+	private Set<Lagerposten> lagerbestand;
 	
 	public Lagerverwaltung()
 	{
 		berechtigteMitarbeiter = new HashSet<String>();
-		lagerbestand = new ArrayList<Lagerposten>();
+		lagerbestand = new HashSet<Lagerposten>();
 	}
 	
 	public void berechtigungErteilen(Mitarbeiter mitarbeiter)
@@ -62,6 +62,17 @@ public class Lagerverwaltung {
 			}
 			if (bestellungMoeglich)
 			{
+				for (Bestellposten bestellposten: bestellpostenListe)
+				{
+					for (Lagerposten lagerposten: lagerbestand)
+					{
+						Artikel artikel = lagerposten.getArtikel();
+						if (artikel.getId().equals(bestellposten.getArtikelID()))
+						{
+							lagerposten.entnehmeMenge(bestellposten.getAnzahl());
+						}	
+					}
+				}
 				System.out.println("Bestellung ausgeführt");
 			}
 			else
@@ -74,5 +85,14 @@ public class Lagerverwaltung {
 			System.out.println("Mitarbeiter nicht berechtigt");
 		}
 		return null;
+	}
+	
+	public void printLagerbestand()
+	{
+		for (Lagerposten lagerposten: lagerbestand)
+		{
+			System.out.println(lagerposten.getArtikel().getId()+ " - " + lagerposten.getArtikel().getName()+ " - "+lagerposten.getLagerbestand()+" Stück");
+		}
+		System.out.println();
 	}
 }

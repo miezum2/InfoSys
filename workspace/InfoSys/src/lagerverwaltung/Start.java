@@ -22,13 +22,13 @@ public class Start {
 		lager.wareneingangBuchen(mitarbeiter0, artikel0, 20, 0.5);
 		lager.wareneingangBuchen(mitarbeiter0, artikel1, 10, 0.8);
 		
+		lager.printLagerbestand();
 		List<Bestellposten> bestellpostenListe = new ArrayList<Bestellposten>();
 		bestellpostenListe.add(new Bestellposten("00000", 20));
 		bestellpostenListe.add(new Bestellposten("00001", 5));
 		
-		lager.bestellungAusfuehren(mitarbeiter0, bestellpostenListe);
-		
-		
+		lager.bestellungAusfuehren(mitarbeiter0, bestellpostenListe);		
+		lager.printLagerbestand();
 	
 	}
 }

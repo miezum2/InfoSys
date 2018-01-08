@@ -20,6 +20,11 @@ public class Lagerposten {
 	public int getLagerbestand() {
 		return lagerbestand;
 	}
+	
+	public void entnehmeMenge(int anzahl)
+	{
+		lagerbestand -= anzahl;
+	}
 
 	public double getPreis() {
 		return preis;
