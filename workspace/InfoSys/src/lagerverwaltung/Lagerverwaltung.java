@@ -2,7 +2,10 @@ package lagerverwaltung;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +21,9 @@ public class Lagerverwaltung {
 		berechtigteMitarbeiter = new HashSet<String>();
 		lagerbestand = new HashSet<Lagerposten>();
 		try {
-			out = new PrintWriter("text.txt");
+			DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy_HH_mm");
+			Date date = new Date();
+			out = new PrintWriter("Log_vom_"+dateFormat.format(date)+".txt");
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -29,14 +34,14 @@ public class Lagerverwaltung {
 	public void berechtigungErteilen(Mitarbeiter mitarbeiter)
 	{
 		berechtigteMitarbeiter.add(mitarbeiter.getId());
-		out.println("Die Rechte wurden an " +  mitarbeiter.getName() + " vergeben.");
+		logEintrag("Die Rechte wurden an " +  mitarbeiter.getName() + " vergeben.");
 		
 	}
 	
 	public void berechtigungZurueckziehen(Mitarbeiter mitarbeiter)
 	{
 		berechtigteMitarbeiter.remove(mitarbeiter.getId());
-		out.println("Die Rechte wurden " +  mitarbeiter.getName() + " entzogen.");
+		logEintrag("Die Rechte wurden " +  mitarbeiter.getName() + " entzogen.");
 	}
 	
 	public void lagerbestandAusgeben()
@@ -68,7 +73,7 @@ public class Lagerverwaltung {
 			if(!mengeaufaddiert) {
 				lagerbestand.add(new Lagerposten(artikel, anzahl, preis));
 			}
-			out.println(anzahl + " " + artikel.getName() + " zum Preis von jeweils " + preis + " Euro wurden hinzugefuegt.");
+			logEintrag(anzahl + " " + artikel.getName() + " zum Preis von jeweils " + preis + " Euro wurden hinzugefuegt.");
 		}
 	}
 	
@@ -124,7 +129,9 @@ public class Lagerverwaltung {
 		out.close();
 	}
 	
-	private void logEintrag(String text) {		
-		out.println(text = "");
+	private void logEintrag(String text) {	
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		Date date = new Date();
+		out.println(dateFormat.format(date)+ ": " + text);
 	}
 }
