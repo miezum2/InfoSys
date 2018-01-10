@@ -34,14 +34,14 @@ public class Lagerverwaltung {
 	public void berechtigungErteilen(Mitarbeiter mitarbeiter)
 	{
 		berechtigteMitarbeiter.add(mitarbeiter.getId());
-		logEintrag("Die Rechte wurden an " +  mitarbeiter.getName() + " vergeben.");
+		logEintrag("Lagerrechte wurden an Mitarbeiter \"" +  mitarbeiter.getName() + "\" mit der ID " + mitarbeiter.getId() + " vergeben.", true);
 		
 	}
 	
 	public void berechtigungZurueckziehen(Mitarbeiter mitarbeiter)
 	{
 		berechtigteMitarbeiter.remove(mitarbeiter.getId());
-		logEintrag("Die Rechte wurden " +  mitarbeiter.getName() + " entzogen.");
+		logEintrag("Lagerrechte wurden Mitarbeiter \"" +  mitarbeiter.getName() + "\" mit der ID " + mitarbeiter.getId() + " entzogen.", true);
 	}
 	
 	public void lagerbestandAusgeben()
@@ -73,7 +73,11 @@ public class Lagerverwaltung {
 			if(!mengeaufaddiert) {
 				lagerbestand.add(new Lagerposten(artikel, anzahl, preis));
 			}
-			logEintrag(anzahl + " " + artikel.getName() + " zum Preis von jeweils " + preis + " Euro wurden hinzugefuegt.");
+			logEintrag("Mitarbeiter " + mitarbeiter.getId() + " hat " + anzahl + "x " + artikel.getName() + " mit der ID " + artikel.getId() + " zum Preis von jeweils " + preis + " Euro hinzugefuegt.", true);
+		}
+		else
+		{
+			logEintrag("Mitarbeiter " + mitarbeiter.getId() + " hat versucht, Artikel zum Lager hinzuzufuegen. Der Zugriff wurde verweigert.", true);
 		}
 	}
 	
@@ -100,6 +104,7 @@ public class Lagerverwaltung {
 			}
 			if (bestellungMoeglich)
 			{
+				logEintrag("Mitarbeiter " + mitarbeiter.getId() + " hat eine Bestellung im Wert von " + " Euro durchgefuehrt. Details wurden in Bestellung_09_..._" + mitarbeiter.getId() + ".txt gespeichert.", true);
 				for (Bestellposten bestellposten: bestellpostenListe)
 				{
 					for (Lagerposten lagerposten: lagerbestand)
@@ -108,18 +113,19 @@ public class Lagerverwaltung {
 						if (artikel.getId().equals(bestellposten.getArtikelID()))
 						{
 							lagerposten.entnehmeMenge(bestellposten.getAnzahl());
+							//logEintrag(bestellposten.getAnzahl() + "x " + artikel.getName(), false);
 						}	
 					}
 				}
-				System.out.println("Bestellung ausgeführt");
 			}
 			else
 			{
-				System.out.println("Ausführung nicht möglich");
+				logEintrag("Eine von Mitarbeiter " + mitarbeiter.getId() + " angefragte Bestellung konnte nicht durchgeführt werden, da sich nicht genuegend Artikel im Lager befinden.", true);
 			}
 		}
 		else
 		{
+			logEintrag("Mitarbeiter " + mitarbeiter.getId() + " hat versucht, eine Bestellung durchzufuehren. Der Zugriff wurde verweigert.", true);
 			System.out.println("Mitarbeiter nicht berechtigt");
 		}
 		return null;
@@ -129,9 +135,22 @@ public class Lagerverwaltung {
 		out.close();
 	}
 	
-	private void logEintrag(String text) {	
+	private void logEintrag(String text, boolean printDate) {	
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-		Date date = new Date();
-		out.println(dateFormat.format(date)+ ": " + text);
+		Date dateObject = new Date();
+		String date = dateFormat.format(dateObject);
+		if (printDate)
+		{
+			text = date + ": " + text;
+		}
+		else
+		{
+			for (int i = 0; i < date.length()+4; i++)
+			{
+				text = " " + text;
+			}
+		}
+		out.println(text);
+		System.out.println(text);
 	}
 }
