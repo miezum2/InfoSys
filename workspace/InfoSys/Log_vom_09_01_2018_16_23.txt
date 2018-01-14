@@ -1,9 +1,0 @@
-09.01.2018 16:23:57: Lagerrechte wurden an Mitarbeiter "Manfred" mit der ID 0000 vergeben.
-09.01.2018 16:23:57: Lagerrechte wurden an Mitarbeiter "Sandra" mit der ID 0001 vergeben.
-09.01.2018 16:23:57: Lagerrechte wurden an Mitarbeiter "Paul" mit der ID 0002 vergeben.
-09.01.2018 16:23:57: Lagerrechte wurden Mitarbeiter "Paul" mit der ID 0002 entzogen.
-09.01.2018 16:23:57: Mitarbeiter 0000 hat 20x Apfel mit der ID 00000 zum Preis von jeweils 0.5 Euro hinzugefuegt.
-09.01.2018 16:23:57: Mitarbeiter 0000 hat 10x Birne mit der ID 00001 zum Preis von jeweils 0.8 Euro hinzugefuegt.
-09.01.2018 16:23:57: Mitarbeiter 0001 hat 15x Birne mit der ID 00001 zum Preis von jeweils 0.9 Euro hinzugefuegt.
-09.01.2018 16:23:57: Mitarbeiter 0002 hat versucht, Artikel zum Lager hinzuzufuegen. Der Zugriff wurde verweigert.
-09.01.2018 16:23:57: Mitarbeiter 0000 hat eine Bestellung im Wert von  Euro durchgefuehrt. Details wurden in Bestellung_09_..._0000.txt gespeichert.
